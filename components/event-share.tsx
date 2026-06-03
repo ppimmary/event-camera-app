@@ -6,10 +6,9 @@ import { Check, Copy } from 'lucide-react'
 
 type EventShareProps = {
   shareUrl: string
-  eventName: string
 }
 
-export function EventShare({ shareUrl, eventName }: EventShareProps) {
+export function EventShare({ shareUrl }: EventShareProps) {
   const [copied, setCopied] = useState(false)
 
   const copyLink = useCallback(async () => {
@@ -23,37 +22,40 @@ export function EventShare({ shareUrl, eventName }: EventShareProps) {
   }, [shareUrl])
 
   return (
-    <div className="w-full flex flex-col gap-4">
-      <div className="card p-5 flex flex-col items-center text-center">
-        <p className="band-green mb-4">Scan to get in</p>
-        <div className="p-3 rounded-xl bg-white" style={{ border: '2px solid var(--ink)' }}>
-          <QRCodeSVG
-            value={shareUrl}
-            size={180}
-            level="M"
-            marginSize={2}
-            fgColor="#1a1a1a"
-            bgColor="#ffffff"
-          />
-        </div>
-        <p className="font-black text-lg mt-4">{eventName}</p>
+    <div className="flex flex-col items-center gap-8 w-full max-w-sm">
+      <div
+        className="p-4 rounded-2xl"
+        style={{ background: '#fff', border: '1px solid var(--border)' }}
+      >
+        <QRCodeSVG
+          value={shareUrl}
+          size={200}
+          level="M"
+          marginSize={2}
+          fgColor="#0d0d0d"
+          bgColor="#ffffff"
+        />
       </div>
 
-      <div className="card p-4">
-        <p className="band-green mb-3">Or share the link</p>
+      <div className="w-full">
+        <p className="text-xs uppercase tracking-widest mb-2 text-center" style={{ color: '#666' }}>
+          Share link
+        </p>
         <div
-          className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm break-all"
-          style={{ border: '2px solid var(--ink)' }}
+          className="flex items-center gap-2 rounded-xl px-3 py-2 text-sm break-all"
+          style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}
         >
-          <span className="flex-1 font-medium">{shareUrl}</span>
+          <span className="flex-1" style={{ color: 'var(--foreground)' }}>
+            {shareUrl}
+          </span>
           <button
             type="button"
             onClick={copyLink}
-            className="btn-ink flex-shrink-0 px-3 py-2 text-xs sm:text-sm gap-1"
+            className="flex-shrink-0 p-2 rounded-lg transition-colors hover:opacity-80"
+            style={{ background: 'var(--border)', color: 'var(--accent)' }}
             aria-label={copied ? 'Copied' : 'Copy link'}
           >
-            {copied ? <Check size={16} /> : <Copy size={16} />}
-            {copied ? 'Copied' : 'Copy'}
+            {copied ? <Check size={18} /> : <Copy size={18} />}
           </button>
         </div>
       </div>

@@ -1,10 +1,9 @@
 import type { Metadata } from 'next'
-import { BRAND } from '@/lib/brand'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: `${BRAND.name} — Event photo drop`,
-  description: BRAND.description,
+  title: 'Once — Disposable Camera',
+  description: 'Capture your event together. Reveal it all at once.',
 }
 
 export default function RootLayout({
@@ -14,7 +13,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="min-h-dvh antialiased">{children}</body>
+      <body className="min-h-dvh">{children}</body>
     </html>
   )
 }
